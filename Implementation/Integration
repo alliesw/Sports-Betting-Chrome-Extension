@@ -1,0 +1,32 @@
+2. Integrating Kalshi (Real-Time Markets)
+Kalshi is developer-friendly and provides a robust WebSocket API for sub-second price updates.
+
+API Endpoint: wss://api.elections.kalshi.com/trade-api/v2/stream (This endpoint handles all markets, not just elections).
+
+Authentication: You will need an API Key and Secret from the Kalshi Developer Portal.
+
+Implementation: 1. Initiate a WebSocket connection in your background.js. 2. Subscribe to specific market tickers (e.g., FED-2026-01-28). 3. Listen for orderbook_delta or ticker events.
+
+3. Integrating FanDuel (Sports Stats)
+FanDuel does not have a public API for individual developers. You have two main paths:
+
+Option A: Third-Party Data Providers (Recommended)
+
+Using a middleman service like SportsData.io or The Odds API is the most reliable way to get live scores and odds without getting banned for scraping.
+
+Pros: Legal, stable JSON format, real-time.
+
+Cons: Often requires a monthly subscription fee.
+
+Option B: DOM Scraping (The "Hacker" Way)
+
+If you want to pull data directly from the page the user is viewing:
+
+Content Script: Use MutationObserver to watch for changes in the FanDuel DOM (e.g., price shifts in the betslip).
+
+Logic: ```javascript const observer = new MutationObserver((mutations) => { const odds = document.querySelector('.some-fanduel-class').innerText; chrome.runtime.sendMessage({ type: 'UPDATE_STATS', data: odds }); }); observer.observe(document.body, { childList: true, subtree: true });
+
+Risk: FanDuel frequently changes its CSS classes to break scrapers.
+
+4. Technical Setup (Manifest v3)
+Create a manifest.json to give your extension the necessary "eyes" and "ears."
