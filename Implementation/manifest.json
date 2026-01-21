@@ -21,4 +21,21 @@
     }
   ]
 }
-
+--------------------------------------- or
+{
+  "manifest_version": 3,
+  "name": "Kalshi FanDuel Connector",
+  "version": "1.0",
+  "description": "Syncs Kalshi market prices to FanDuel event pages.",
+  "permissions": ["storage"],
+  "host_permissions": [
+    "https://*.fanduel.com/*",
+    "https://*.kalshi.com/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": ["https://*.fanduel.com/*"],
+      "js": ["content.js"]
+    }
+  ]
+}
