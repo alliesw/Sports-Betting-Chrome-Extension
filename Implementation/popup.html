@@ -1,0 +1,23 @@
+1. The Popup UI (popup.html)
+This is the interface that appears when you click the extension icon. It lists the active Kalshi markets and provides a search/link interface.
+
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body { width: 300px; font-family: sans-serif; padding: 10px; }
+    .market-item { 
+      border-bottom: 1px solid #eee; padding: 8px 0; 
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .link-btn { cursor: pointer; background: #007bff; color: white; border: none; border-radius: 4px; padding: 4px 8px; }
+    .status { font-size: 0.8em; color: #666; }
+  </style>
+</head>
+<body>
+  <h3>Live Kalshi Markets</h3>
+  <div id="market-list">
+    </div>
+  <script src="popup.js"></script>
+</body>
+</html>
