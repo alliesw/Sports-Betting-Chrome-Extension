@@ -64,6 +64,7 @@ document.getElementById('save-keys').addEventListener('click', async () => {
 4. Important Manifest Permissions
 
 To use chrome.storage.session, you must declare the permission in your manifest.json. Note that session storage is not accessible by content scripts by default—this is a security feature to prevent FanDuel or other sites from stealing your Kalshi token.
+or use chrome.storage.local 
 
 JSON
 {
