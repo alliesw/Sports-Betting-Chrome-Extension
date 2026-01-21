@@ -21,3 +21,34 @@ Service Worker,   Maintains the WebSocket connection to Kalshi and fetches FanDu
 Content Script,   Injects the UI (stats overlay) directly onto the betting pages.
 Popup UI,         Allows the user to toggle specific leagues or markets on/off.
 
+# Sports Probability Bridge 📈
+**FanDuel x Kalshi Real-Time Data Integration**
+
+A Chrome extension built with Manifest v3 that bridges traditional sports betting markets (FanDuel) with prediction market probabilities (Kalshi).
+
+## 🚀 Installation (Developer Mode)
+Before publishing to the Chrome Web Store, you can test the extension locally:
+
+1. **Clone the Repo:**
+   `git clone https://github.com/your-username/sports-probability-bridge.git`
+2. **Open Extensions Page:**
+   Open Chrome and navigate to `chrome://extensions/`.
+3. **Enable Developer Mode:**
+   Toggle the **"Developer mode"** switch in the top-right corner.
+4. **Load Unpacked:**
+   Click the **"Load unpacked"** button and select the root folder of this project.
+5. **Pin it:**
+   Click the puzzle piece icon in your toolbar and pin the bridge icon for quick access.
+
+## 🛠 Project Structure
+* `manifest.json`: Extension configuration and permissions.
+* `background.js`: Handles Kalshi WebSocket connections and Auth.
+* `content.js`: Scrapes FanDuel DOM and injects the overlay UI.
+* `popup/`: The UI for manual market linking and API key entry.
+* `assets/`: Icons and CSS stylesheets.
+
+## 🔒 Security Note
+This extension uses `chrome.storage.session` to store Kalshi tokens. This ensures your session data is wiped every time the browser is closed. Never commit your `config.js` or API keys to a public repository.
+
+## ⚖️ Legal Disclaimer
+This tool is for **informational purposes only**. It does not facilitate gambling or execute trades. Users are responsible for complying with their local laws regarding FanDuel and Kalshi usage.
