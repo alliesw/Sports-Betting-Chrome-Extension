@@ -49,6 +49,3 @@ Before publishing to the Chrome Web Store, you can test the extension locally:
 
 ## 🔒 Security Note
 This extension uses `chrome.storage.session` to store Kalshi tokens. This ensures your session data is wiped every time the browser is closed. Never commit your `config.js` or API keys to a public repository.
-
-## ⚖️ Legal Disclaimer
-This tool is for **informational purposes only**. It does not facilitate gambling or execute trades. Users are responsible for complying with their local laws regarding FanDuel and Kalshi usage.
