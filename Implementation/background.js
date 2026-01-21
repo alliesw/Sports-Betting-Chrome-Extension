@@ -48,3 +48,35 @@ function broadcastToTabs(stats) {
 }
 
 connectToKalshi();
+
+
+// background.js
+
+async function kalshiLogin(apiKey, privateKey) {
+  const timestamp = Date.now().toString();
+  const method = "POST";
+  const path = "/trade-api/v2/login";
+  
+  // 1. Generate the signature (Requires an RSA library like 'jsrsasign')
+  const message = timestamp + method + path;
+  const signature = generateRSASignature(message, privateKey);
+
+  // 2. Exchange for a Session Token
+  const response = await fetch(`https://api.kalshi.com${path}`, {
+    method: 'POST',
+    headers: {
+      'KALSHI-ACCESS-KEY': apiKey,
+      'KALSHI-ACCESS-SIGNATURE': signature,
+      'KALSHI-ACCESS-TIMESTAMP': timestamp,
+      'Content-Type': 'application/json'
+    }
+  });
+
+  const data = await response.json();
+  
+  if (data.token) {
+    // 3. Store the temporary token securely (In-Memory Only)
+    await chrome.storage.session.set({ kalshiToken: data.token });
+    console.log("Securely logged into Kalshi.");
+  }
+}
