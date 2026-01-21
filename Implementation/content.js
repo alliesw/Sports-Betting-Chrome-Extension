@@ -126,3 +126,50 @@ async function initializeTracking() {
 
 // Start the check
 initializeTracking();
+
+
+
+--------------------
+//Injecting the Dashboard (content.js)
+
+//You’ll want to inject this HTML structure only when a match is found.
+
+// Function to create/update the UI
+function updateOverlay(kalshiPrice, fanDuelOdds) {
+  let container = document.getElementById('fd-kalshi-bridge');
+  
+  if (!container) {
+    container = document.createElement('div');
+    container.id = 'fd-kalshi-bridge';
+    document.body.appendChild(container);
+  }
+
+  // Calculate Implied Probability from FD Odds (e.g., -110)
+  const fdProb = calculateImpliedProb(fanDuelOdds); 
+  const diff = (kalshiPrice - fdProb).toFixed(1);
+
+  container.innerHTML = `
+    <div class="bridge-header">
+      <span>Market Insights</span>
+      <span style="color: #00d4ff">● Live</span>
+    </div>
+    <div class="bridge-body">
+      <div class="stat-row">
+        <span class="stat-label">Kalshi Probability</span>
+        <span class="stat-value">${kalshiPrice}%</span>
+      </div>
+      <div class="stat-row">
+        <span class="stat-label">FanDuel Implied</span>
+        <span class="stat-value">${fdProb}%</span>
+      </div>
+      <div class="value-indicator ${diff > 2 ? 'positive-value' : 'neutral-value'}">
+        ${diff > 0 ? '+' : ''}${diff}% Edge Found
+      </div>
+    </div>
+  `;
+}
+
+function calculateImpliedProb(odds) {
+  if (odds > 0) return (100 / (odds + 100) * 100).toFixed(1);
+  return (Math.abs(odds) / (Math.abs(odds) + 100) * 100).toFixed(1);
+}
