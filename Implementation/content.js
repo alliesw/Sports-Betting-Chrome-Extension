@@ -64,33 +64,36 @@ function resolveTeamName(name) {
 }
 
 function getSimilarity(s1, s2) {
-  const longer = s1.length > s2.length ? s1 : s2;
-  const shorter = s1.length > s2.length ? s2 : s1;
+  // Always resolve aliases before comparing
+  const str1 = resolveTeamName(s1);
+  const str2 = resolveTeamName(s2);
+
+  const longer = str1.length > str2.length ? str1 : str2;
+  const shorter = str1.length > str2.length ? str2 : str1;
   const longerLength = longer.length;
 
   if (longerLength === 0) return 1.0;
 
   // Calculate Levenshtein Distance
   const costs = [];
-  for (let i = 0; i <= s1.length; i++) {
+  for (let i = 0; i <= str1.length; i++) {
     let lastValue = i;
-    for (let j = 0; j <= s2.length; j++) {
+    for (let j = 0; j <= str2.length; j++) {
       if (i === 0) {
         costs[j] = j;
       } else if (j > 0) {
         let newValue = costs[j - 1];
-        if (s1.charAt(i - 1) !== s2.charAt(j - 1)) {
+        if (str1.charAt(i - 1) !== str2.charAt(j - 1)) {
           newValue = Math.min(Math.min(newValue, lastValue), costs[j]) + 1;
         }
         costs[j - 1] = lastValue;
         lastValue = newValue;
       }
     }
-    if (i > 0) costs[s2.length] = lastValue;
+    if (i > 0) costs[str2.length] = lastValue;
   }
 
-  const distance = costs[s2.length];
-  // Return percentage of similarity
+  const distance = costs[str2.length];
   return (longerLength - distance) / longerLength;
 }
 
