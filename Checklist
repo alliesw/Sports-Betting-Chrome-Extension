@@ -1,0 +1,39 @@
+[ ] No "Place Bet" Buttons: Do not include links that automatically add items to a betslip or execute trades. The extension must remain a "read-only" dashboard.
+
+[ ] Host Permission Scope: Ensure your manifest.json only requests access to fanduel.com and kalshi.com. Requesting *://*/* (all sites) will trigger a manual review that can take weeks.
+
+[ ] Brand Neutrality: Your extension name cannot be "FanDuel & Kalshi Real-Time Stats." Use something like "Sports Probability Bridge" to avoid trademark infringement.
+
+[ ] Two-Step Verification: Google now requires 2FA to be enabled on your developer account before you can publish.
+
+[ ] "Single Purpose" Rule: Your extension must do one thing well. Don't add a "Weather Widget" or "Stock Tracker" to a betting tool.
+
+2. Privacy Policy Template
+
+You are required to host a privacy policy on a public URL (like a GitHub Page or a simple website). Because you are handling API Keys and Betting Data, you must use "Sensitive Data" disclosures.
+
+Privacy Policy for [Extension Name]
+
+1. Data Collection: This extension collects User-Provided API Keys for Kalshi to authenticate market data. It scrapes publicly visible odds from FanDuel only when the user is actively navigating those pages.
+
+2. Data Usage: All data is processed locally on the user's machine. API Keys are stored using chrome.storage.session and are never transmitted to our servers.
+
+3. Third-Party Sharing: We do not sell, trade, or rent user data to third parties. Data is only exchanged between the user's browser and the official APIs of FanDuel/Kalshi.
+
+4. Financial Disclosure: This tool is for informational purposes only. We do not facilitate financial transactions, nor do we have access to your betting wallets or bank accounts.
+
+3. Chrome Web Store Listing Assets
+
+To pass the "Quality" check, you need professional-looking assets.
+
+Asset	Size	Requirement
+Icon	128x128 px	High-res PNG with transparent background.
+Screenshots	1280x800 px	At least two. One showing the overlay on FanDuel.
+Promo Tile	440x280 px	This is what users see in search results. Keep text minimal.
+4. Final Deployment Steps
+
+Zip your project: Ensure you don't include .git folders or node_modules.
+
+Pay the Fee: If this is your first extension, there is a one-time $5 USD developer fee.
+
+Test Instructions: In the "Privacy" tab of the dashboard, you must provide a test API key for the Google reviewers to see how the Kalshi integration works, or they will reject it for "hidden functionality."
