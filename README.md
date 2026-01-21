@@ -10,6 +10,13 @@
 
 Requirements: 
 Extensions will need to handle both WebSockets (for Kalshi's rapid updates) and REST APIs or DOM Scraping (for FanDuel).
+Implementation Checklist
+
+Check Selectors: Verify that .team-name-class is the actual class FanDuel is currently using (these change frequently).
+
+Debouncing: If the page is very active, the observer might fire too often. You can "debounce" the performMatch function to limit it to running once every 500ms.
+
+Permissions: Ensure your manifest.json has host_permissions for both Kalshi and FanDuel.
 
 PROJECT ARCHITECTURE: 
 Component         Responsibility
